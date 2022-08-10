@@ -28,6 +28,7 @@ Additional environment variables:
 docker run -d \
   --name mysql_master \
   -e MYSQL_ROOT_PASSWORD=root \
+  -v ./test.sql:/docker-entrypoint-initdb.d/test.sql
   bergerx/mysql-replication:5.7
 ```
 

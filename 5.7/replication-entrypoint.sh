@@ -18,6 +18,7 @@ if [ -n "$MASTER_PORT_3306_TCP_ADDR" ]; then
   export MASTER_PORT=$MASTER_PORT_3306_TCP_PORT
 fi
 
+# is master
 if [ -z "$MASTER_HOST" ]; then
   cat >/docker-entrypoint-initdb.d/init-master.sh  <<'EOF'
 #!/bin/bash
@@ -45,6 +46,7 @@ binlog-ignore-db=performance_schema
 binlog-ignore-db=mysql
 binlog-ignore-db=sys
 EOF
+# is slave
 else
   cp -v /init-slave.sh /docker-entrypoint-initdb.d/
   cat > /etc/mysql/mysql.conf.d/slave.cnf << EOF
