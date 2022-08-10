@@ -27,7 +27,7 @@ Additional environment variables:
 ```
 docker run -d \
   --name mysql_master \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=1 \
+  -e MYSQL_ROOT_PASSWORD=root \
   bergerx/mysql-replication:5.7
 ```
 
@@ -36,13 +36,7 @@ docker run -d \
 ```
 docker run -d \
   --name mysql_slave \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=1 \
+  -e MYSQL_ROOT_PASSWORD=root \
   --link mysql_master:master \
   bergerx/mysql-replication:5.7
-```
-
-# Test the replication
-```
-cat 02-master-database.sql | docker exec -i mysql_master mysql
-docker exec -it mysql_slave mysql -e 'select * from test.names'
 ```
